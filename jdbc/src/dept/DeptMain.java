@@ -8,7 +8,7 @@ public class DeptMain {
 		boolean run  = true;
 		Scanner sc = new Scanner(System.in);
 		while(run) {
-			
+			System.out.println("sdafsadf");
 		}
 		
 	}
