@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import jdbc.Connect;
 
@@ -35,12 +36,12 @@ public class DeptDAO {
 
 	// 부서정보 전체 가져오기 select * from dept_temp;
 	public List<DeptDTO> getRows() {
-		Connect con = null;
+		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<DeptDTO> list = new ArrayList<DeptDTO>();
 		try {
-			con = getConnection();
+			con =getConnection(); 
 			String sql = "select * from dept_temp";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
