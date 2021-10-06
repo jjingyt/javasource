@@ -23,7 +23,7 @@ public class EmpDAO {
 	}
 	
 	public static Connection getConnection() {
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@211.48.30.28:1521:xe";
 		String user = "c##scott";
 		String password = "tiger";
 		Connection con=null;

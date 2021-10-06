@@ -15,20 +15,19 @@ public class DeptDAO {
 	static {
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
-		} catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e) {			
 			e.printStackTrace();
-		}
+		}		
 	}
+	
 	public static Connection getConnection() {
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@211.48.30.28:1521:xe";
 		String user = "c##scott";
-		String password ="tiger";
-		
-		Connection con = null;
-		
+		String password = "tiger";
+		Connection con=null;
 		try {
 			con = DriverManager.getConnection(url, user, password);
-		} catch (SQLException e) {
+		} catch (SQLException e) {			
 			e.printStackTrace();
 		}
 		return con;
@@ -51,6 +50,7 @@ public class DeptDAO {
 				dto.setDeptNo(rs.getInt("deptno"));
 				dto.setDname(rs.getString("dname"));
 				dto.setLoc(rs.getString("loc"));
+				list.add(dto);
 			}
 			
 		} catch (Exception e) {
@@ -67,22 +67,22 @@ public class DeptDAO {
 
 
 
-	// 특정 부서정보 가져오기 select * from dept_temp where deptne=?;
+	// 특정 부서정보 가져오기 select * from dept_temp where deptn=?;
 	public DeptDTO getRow(int deptno) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		DeptDAO dto = null;
+		DeptDTO dto = null;
 		
 		
 		try {
-			String sql = "select * from dept_temp where deptne=?";
+			String sql = "select * from dept_temp where deptNo=?";
 			con = getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, deptno);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				dto = new DeptDAO();
+				dto = new DeptDTO();
 				dto.setDeptNo(rs.getInt(1));
 				dto.setDname(rs.getString(2));
 				dto.setLoc(rs.getString(3));
@@ -141,7 +141,7 @@ public class DeptDAO {
 		boolean flag = false;
 		
 		try {
-			String sql = "update dept_temp set dname=? where deptno=?";
+			String sql = "update dept_temp set dname=? where deptNo=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dname);
 			pstmt.setInt(2, deptNo);
@@ -171,7 +171,7 @@ public class DeptDAO {
 			boolean flag = false;
 			
 			try {
-				String sql = "delete from dept_temp where deptno=?";
+				String sql = "delete from dept_temp where deptNo=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, deptNo);
 				
